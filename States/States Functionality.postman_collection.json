@@ -1,0 +1,298 @@
+{
+	"info": {
+		"_postman_id": "4a4818ac-861d-4c75-8dd8-4343c66f2337",
+		"name": "States Functionality",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23503026"
+	},
+	"item": [
+		{
+			"name": "States",
+			"item": [
+				{
+					"name": "CampusLogin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"sorry this is hidden\",\r\n  \"password\": \"sorry this is hidden\",\r\n  \"rememberMe\": \"true\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://test.mersys.io/auth/login",
+							"protocol": "https",
+							"host": [
+								"test",
+								"mersys",
+								"io"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "StatesAdding",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.collectionVariables.set(\"StatesID\", pm.response.json().id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": null,\r\n  \"name\": \"{{$randomFullName}}\",\r\n  \"shortName\": \"{{$randomFirstName}}\",\r\n  \"country\": {\r\n    \"id\": \"63a45bdbcb75ee5c2199a8cf\"\r\n  },\r\n  \"translateName\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CAMPUSURL}}states",
+							"host": [
+								"{{CAMPUSURL}}states"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "StatesAddingNegative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{StatesID}}\",\r\n  \"name\": \"{{$randomFullName}}\",\r\n  \"shortName\": \"{{$randomFirstName}}\",\r\n  \"country\": {\r\n    \"id\": \"63a45bdbcb75ee5c2199a8cf\"\r\n  },\r\n  \"translateName\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CAMPUSURL}}states",
+							"host": [
+								"{{CAMPUSURL}}states"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "StatesEditing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{StatesID}}\",\r\n  \"name\": \"{{$randomFullName}}\",\r\n  \"shortName\": \"{{$randomFirstName}}\",\r\n  \"country\": {\r\n    \"id\": \"63a45bdbcb75ee5c2199a8cf\"\r\n  },\r\n  \"translateName\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CAMPUSURL}}states",
+							"host": [
+								"{{CAMPUSURL}}states"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "StatesDeleting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CAMPUSURL}}states/{{StatesID}}",
+							"host": [
+								"{{CAMPUSURL}}states"
+							],
+							"path": [
+								"{{StatesID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "StatesDeletingNegative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"//There is a bug here. It deleting the deleted item again.\r",
+									"//status code should be 400 but it is returning 200\r",
+									"//Disclosure report sent to developer."
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CAMPUSURL}}states/{{StatesID}}",
+							"host": [
+								"{{CAMPUSURL}}states"
+							],
+							"path": [
+								"{{StatesID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "StatesEditing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{StatesID}}\",\r\n  \"name\": \"{{$randomFullName}}\",\r\n  \"shortName\": \"{{$randomFirstName}}\",\r\n  \"country\": {\r\n    \"id\": \"63a45bdbcb75ee5c2199a8cf\"\r\n  },\r\n  \"translateName\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CAMPUSURL}}states",
+							"host": [
+								"{{CAMPUSURL}}states"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "StatesID",
+			"value": ""
+		}
+	]
+}
