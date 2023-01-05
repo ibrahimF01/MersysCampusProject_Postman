@@ -62,10 +62,9 @@
 							"var code = body.code;",
 							"console.log(id);  // kod dogruluk kontrolu",
 							"",
-							"pm.collectionVariables.set(\"departmentName\",name); ",
 							"pm.collectionVariables.set(\"departmentId\",id);",
-							"pm.collectionVariables.set(\"departmentCode\",code);",
-							"",
+							"pm.collectionVariables.set(\"departmentName\",name); ",
+							"pm.collectionVariables.set(\"departmentCode\", code);",
 							"// collection variables are set.",
 							"",
 							"pm.test(\"Successful POST request\", function () {",
@@ -150,7 +149,7 @@
 			"response": []
 		},
 		{
-			"name": "Creating subcomponent",
+			"name": "Filling Out subcomponent",
 			"event": [
 				{
 					"listen": "test",
@@ -181,7 +180,8 @@
 							"",
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
-							"});"
+							"});",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -217,7 +217,7 @@
 			"response": []
 		},
 		{
-			"name": "Creating subcomp. Negative",
+			"name": "Filling Out Subcomp. -Negative",
 			"event": [
 				{
 					"listen": "test",
@@ -225,7 +225,9 @@
 						"exec": [
 							"pm.test(\"Status code is 400\", function () ",
 							"{pm.response.to.have.status(400);}",
-							");"
+							");",
+							"//Error title should not have been \"bad request\" but its message sholud have been \"there is already a record with same name...\"",
+							" "
 						],
 						"type": "text/javascript"
 					}
@@ -267,6 +269,16 @@
 					"listen": "test",
 					"script": {
 						"exec": [
+							"var body = pm.response.json();",
+							"var id = body.id;",
+							"var name = body.name;",
+							"var code = body.code;",
+							"console.log(id);  // kod dogruluk kontrolu",
+							"",
+							"pm.collectionVariables.set(\"departmentId\",id);",
+							"pm.collectionVariables.set(\"departmentName\",name); ",
+							"pm.collectionVariables.set(\"departmentCode\", code);",
+							"",
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});"
@@ -324,7 +336,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\": \"{{departmentId}}\",\n  \"name\": \"Art_Dept\",\n  \"code\": \"AD_11\",\n  \"active\": true,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [\n    {\n      \"name\": \"Literature_Sect\",\n      \"shortName\": \"Ltr_11\",\n      \"active\": true,\n      \"index\": 1\n    }\n  ],\n  \"constants\": [\n    {\n      \"key\": \"Reading\",\n      \"value\": \"Rd_11\",\n      \"index\": 1\n    }\n  ]\n}",
+					"raw": "{\n  \"id\": \"{{departmentId}}\",\n  \"name\": \"{{departmentName}}\",\n  \"code\": \"{{departmentCode}}\",\n  \"active\": true,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [\n    {\n      \"name\": \"Literature_Sect\",\n      \"shortName\": \"Ltr_11\",\n      \"active\": true,\n      \"index\": 1\n    }\n  ],\n  \"constants\": [\n    {\n      \"key\": \"Reading\",\n      \"value\": \"Rd_11\",\n      \"index\": 1\n    }\n  ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -462,7 +474,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\": \"{{departmentId}}\",\n  \"name\": \"Artial_Dept\",\n  \"code\": \"AD_12\",\n  \"active\": true,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [\n    {\n      \"name\": \"Literature_Sect\",\n      \"shortName\": \"Ltr_11\",\n      \"active\": true,\n      \"index\": 1\n    }\n  ],\n  \"constants\": [\n    {\n      \"key\": \"Reading\",\n      \"value\": \"Rd_11\",\n      \"index\": 1\n    }\n  ]\n}",
+					"raw": "{\n  \"id\": \"{{departmentId}}\",\n  \"name\": \"{{$randomDepartment}}\",\n  \"code\": \"{{$randomInt}}\",\n  \"active\": true,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [\n    {\n      \"name\": \"Literature_Sect\",\n      \"shortName\": \"Ltr_11\",\n      \"active\": true,\n      \"index\": 1\n    }\n  ],\n  \"constants\": [\n    {\n      \"key\": \"Reading\",\n      \"value\": \"Rd_11\",\n      \"index\": 1\n    }\n  ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -495,7 +507,8 @@
 						"exec": [
 							"pm.test(\"Status code is 400\", function () {",
 							"    pm.response.to.have.status(400);",
-							"});"
+							"});",
+							"// it results in 'status code of 204' but it should have been 400!"
 						],
 						"type": "text/javascript"
 					}
@@ -571,6 +584,10 @@
 		},
 		{
 			"key": "constantValue",
+			"value": ""
+		},
+		{
+			"key": "departmentSchool",
 			"value": ""
 		}
 	]
