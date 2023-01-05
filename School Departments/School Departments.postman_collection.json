@@ -1,0 +1,577 @@
+{
+	"info": {
+		"_postman_id": "a730b05f-9a12-4cd2-afc5-b3ff15436680",
+		"name": "School Departments",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23483183"
+	},
+	"item": [
+		{
+			"name": "LOGIN",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"turkeyts\",\n    \"password\": \"TechnoStudy123\",\n    \"rememberMe\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/auth/login",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creating",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var body = pm.response.json();",
+							"var id = body.id;",
+							"var name = body.name;",
+							"var code = body.code;",
+							"console.log(id);  // kod dogruluk kontrolu",
+							"",
+							"pm.collectionVariables.set(\"departmentName\",name); ",
+							"pm.collectionVariables.set(\"departmentId\",id);",
+							"pm.collectionVariables.set(\"departmentCode\",code);",
+							"",
+							"// collection variables are set.",
+							"",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": null,\n  \"name\": \"Science_Dept\",\n  \"code\": \"SD_10\",\n  \"active\": false,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [],\n  \"constants\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/department",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"department"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creating -Negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": null,\n  \"name\": \"{{departmentName}}\",\n  \"code\": \"{{departmentCode}}\",\n  \"active\": false,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [],\n  \"constants\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/department",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"department"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creating subcomponent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var body = pm.response.json();",
+							"var id = body.id;",
+							"var name = body.name;",
+							"var code = body.code;",
+							"var sections = body.sections;",
+							"var sectName = sections.name;",
+							"var sectShortName = sections.shortName;",
+							"var constants = body.constants;",
+							"var consKey = constants.key;",
+							"var consValue = constants.value;",
+							"console.log(id);  // kod dogruluk kontrolu",
+							"",
+							"pm.collectionVariables.set(\"departmentName\",name); ",
+							"pm.collectionVariables.set(\"departmentId\",id);",
+							"pm.collectionVariables.set(\"departmentCode\", code);",
+							"pm.collectionVariables.set(\"departmentSections\", \"sections\");",
+							"pm.collectionVariables.set(\"sectionName\", \"sectName\");",
+							"pm.collectionVariables.set(\"sectionShortName\", \"sectShortName\");",
+							"pm.collectionVariables.set(\"departmentConstants\",\"constants\");",
+							"pm.collectionVariables.set(\"constantKey\", \"consKey\");",
+							"pm.collectionVariables.set(\"constantValue\", \"consValue\");",
+							"// collection variables are set.",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"{{departmentId}}\",\n  \"name\": \"{{departmentName}}\",\n  \"code\": \"{{departmentCode}}\",\n  \"active\": false,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [\n    {\n      \"name\": \"Physics_Sect\",\n      \"shortName\": \"Phy_10\",\n      \"active\": false,\n      \"index\": 1\n    }\n  ],\n  \"constants\": [\n    {\n      \"key\": \"Experiment\",\n      \"value\": \"Ex_10\",\n      \"index\": 1\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/department",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"department"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creating subcomp. Negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () ",
+							"{pm.response.to.have.status(400);}",
+							");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": {{departmentId}},\n  \"name\": \"{{departmentName}}\",\n  \"code\": \"{{departmentCode}}\",\n  \"active\": false,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [\n    {\n      \"name\": \"Physics_Sect\",\n      \"shortName\": \"Phy_10\",\n      \"active\": false,\n      \"index\": 1\n    }\n  ],\n  \"constants\": [\n    {\n      \"key\": \"Experiment\",\n      \"value\": \"Ex_10\",\n      \"index\": 1\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/department",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"department"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editing",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"{{departmentId}}\",\n  \"name\": \"Art_Dept\",\n  \"code\": \"AD_11\",\n  \"active\": true,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [\n    {\n      \"name\": \"Physics_Sect\",\n      \"shortName\": \"Phy_10\",\n      \"active\": false,\n      \"index\": 1\n    }\n  ],\n  \"constants\": [\n    {\n      \"key\": \"Experiment\",\n      \"value\": \"Ex_10\",\n      \"index\": 1\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/department",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"department"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editing subcomponent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"{{departmentId}}\",\n  \"name\": \"Art_Dept\",\n  \"code\": \"AD_11\",\n  \"active\": true,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [\n    {\n      \"name\": \"Literature_Sect\",\n      \"shortName\": \"Ltr_11\",\n      \"active\": true,\n      \"index\": 1\n    }\n  ],\n  \"constants\": [\n    {\n      \"key\": \"Reading\",\n      \"value\": \"Rd_11\",\n      \"index\": 1\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/department",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"department"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List of Departments",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/school/6390f3207a3bcb6a7ac977f9/department",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"school",
+						"6390f3207a3bcb6a7ac977f9",
+						"department"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deleting",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/department/{{departmentId}}",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"department",
+						"{{departmentId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editing the deleted -Negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"{{departmentId}}\",\n  \"name\": \"Artial_Dept\",\n  \"code\": \"AD_12\",\n  \"active\": true,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [\n    {\n      \"name\": \"Literature_Sect\",\n      \"shortName\": \"Ltr_11\",\n      \"active\": true,\n      \"index\": 1\n    }\n  ],\n  \"constants\": [\n    {\n      \"key\": \"Reading\",\n      \"value\": \"Rd_11\",\n      \"index\": 1\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/department",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"department"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deleting -Negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/department/{{departmentId}}",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"department",
+						"{{departmentId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "departmentName",
+			"value": ""
+		},
+		{
+			"key": "departmentCode",
+			"value": ""
+		},
+		{
+			"key": "departmentId",
+			"value": ""
+		},
+		{
+			"key": "departmentSections",
+			"value": ""
+		},
+		{
+			"key": "sectionName",
+			"value": ""
+		},
+		{
+			"key": "sectionshortName",
+			"value": ""
+		},
+		{
+			"key": "sectionShortName",
+			"value": ""
+		},
+		{
+			"key": "departmentConstants",
+			"value": ""
+		},
+		{
+			"key": "constantKey",
+			"value": ""
+		},
+		{
+			"key": "constantValue",
+			"value": ""
+		}
+	]
+}
