@@ -226,7 +226,7 @@
 							"pm.test(\"Status code is 400\", function () ",
 							"{pm.response.to.have.status(400);}",
 							");",
-							"//Error title should not have been \"bad request\" but its message sholud have been \"there is already a record with same name...\"",
+							"//Error title should not have been \"bad request\" but its message sholud have been \"there is already a section (record) with same name or short name\"",
 							" "
 						],
 						"type": "text/javascript"
@@ -238,7 +238,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\": {{departmentId}},\n  \"name\": \"{{departmentName}}\",\n  \"code\": \"{{departmentCode}}\",\n  \"active\": false,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [\n    {\n      \"name\": \"Physics_Sect\",\n      \"shortName\": \"Phy_10\",\n      \"active\": false,\n      \"index\": 1\n    }\n  ],\n  \"constants\": [\n    {\n      \"key\": \"Experiment\",\n      \"value\": \"Ex_10\",\n      \"index\": 1\n    }\n  ]\n}",
+					"raw": "{\n  \"id\": {{departmentId}},\n  \"name\": \"{{departmentName}}\",\n  \"code\": \"{{departmentCode}}\",\n  \"active\": false,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [\n    {\n      \"name\": \"Physics_Sect\",\n      \"shortName\": \"Phy_10\",\n      \"active\": false,\n      \"index\": 1\n    },\n    {\"name\": \"Physics_Sect\",\n      \"shortName\": \"Phy_10\",\n      \"active\": false,\n      \"index\": 1\n    }\n  ],\n  \"constants\": [\n    {\n      \"key\": \"Experiment\",\n      \"value\": \"Ex_10\",\n      \"index\": 1\n    },\n      {\n      \"key\": \"Experiment\",\n      \"value\": \"Ex_10\",\n      \"index\": 1\n    }\n  ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -383,7 +383,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -508,7 +508,7 @@
 							"pm.test(\"Status code is 400\", function () {",
 							"    pm.response.to.have.status(400);",
 							"});",
-							"// it results in 'status code of 204' but it should have been 400!"
+							"// it results in 'status code:204' but it should have been 400!"
 						],
 						"type": "text/javascript"
 					}
