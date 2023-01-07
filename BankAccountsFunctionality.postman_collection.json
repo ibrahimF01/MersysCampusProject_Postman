@@ -1,0 +1,380 @@
+{
+	"info": {
+		"_postman_id": "b5d799b5-a34f-4618-8de2-b6461e950404",
+		"name": "Bank Accounts Functionality",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1081964"
+	},
+	"item": [
+		{
+			"name": "Bank Accounts",
+			"item": [
+				{
+					"name": "CampusLogin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code ise 200\",function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"sorry this is hidden\",\r\n  \"password\": \"sorry this is hidden\",\r\n  \"rememberMe\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CAMPUSURL}}/auth/login",
+							"host": [
+								"{{CAMPUSURL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CampusLoginNegative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"sorry this is hidden\",\r\n  \"password\": \"sorry this is hidden\",\r\n  \"rememberMe\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CAMPUSURL}}/auth/login",
+							"host": [
+								"{{CAMPUSURL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BankAccountsAdding",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var body = pm.response.json();\r",
+									"\r",
+									"pm.collectionVariables.set(\"BankAccountId\", body.id);\r",
+									"pm.collectionVariables.set(\"BankAccountName\", body.name);\r",
+									"pm.collectionVariables.set(\"BankAccountIban\", body.iban);\r",
+									"pm.collectionVariables.set(\"BankAccountBic\", body.integrationCode);\r",
+									"pm.collectionVariables.set(\"SchoolId\", body.schoolId);\r",
+									"\r",
+									"pm.test(\"Status code ise 201\",function(){\r",
+									"    pm.response.to.have.status(201,202);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": null,\r\n  \"name\": \"{{$randomBankAccountName}}\",\r\n  \"iban\": \"{{$randomBankAccountIban}}\",\r\n  \"integrationCode\": \"{{$randomBankAccountBic}}\",\r\n  \"currency\": \"TRY\",\r\n  \"active\": true,\r\n  \"schoolId\": \"{{SchoolId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BANKACCOUNTS}}",
+							"host": [
+								"{{BANKACCOUNTS}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BankAccountsAddingNegative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code ise 400\",function(){\r",
+									"    pm.response.to.have.status(400);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{BankAccountId}}\",\r\n  \"name\": \"{{BankAccountName}}\",\r\n  \"iban\": \"{{BankAccountIban}}\",\r\n  \"integrationCode\": \"{{BankAccountBic}}\",\r\n  \"currency\": \"TRY\",\r\n  \"active\": true,\r\n  \"schoolId\": \"{{SchoolId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BANKACCOUNTS}}",
+							"host": [
+								"{{BANKACCOUNTS}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BankAccountsEditing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code ise 200\",function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{BankAccountId}}\",\r\n  \"name\": \"{{BankAccountName}}\",\r\n  \"iban\": \"{{BankAccountIban}}\",\r\n  \"integrationCode\": \"{{BankAccountBic}}\",\r\n  \"currency\": \"EUR\",\r\n  \"active\": true,\r\n  \"schoolId\": \"{{SchoolId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BANKACCOUNTS}}",
+							"host": [
+								"{{BANKACCOUNTS}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BankAccountsDeleting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code ise 200\",function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BANKACCOUNTS}}/{{BankAccountId}}",
+							"host": [
+								"{{BANKACCOUNTS}}"
+							],
+							"path": [
+								"{{BankAccountId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BankAccountsDeletingNegative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code ise 400\",function(){\r",
+									"    pm.response.to.have.status(400);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"63b9402444ca3446740418ee\",\r\n  \"name\": \"Credit Card Account\",\r\n  \"iban\": \"PT36 0230 0624 0338 0043 82\",\r\n  \"integrationCode\": \"MWPIREB1417\",\r\n  \"currency\": \"EUR\",\r\n  \"active\": true,\r\n  \"schoolId\": \"6390f3207a3bcb6a7ac977f9\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BANKACCOUNTS}}/{{BankAccountId}}",
+							"host": [
+								"{{BANKACCOUNTS}}"
+							],
+							"path": [
+								"{{BankAccountId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BankAccountsEditingNegative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code ise 400\",function(){\r",
+									"    pm.response.to.have.status(400);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{BankAccountId}}\",\r\n  \"name\": \"{{BankAccountName}}\",\r\n  \"iban\": \"{{BankAccountIban}}\",\r\n  \"integrationCode\": \"{{BankAccountBic}}\",\r\n  \"currency\": \"EUR\",\r\n  \"active\": true,\r\n  \"schoolId\": \"{{SchoolId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BANKACCOUNTS}}",
+							"host": [
+								"{{BANKACCOUNTS}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "CAMPUSURL",
+			"value": "https://test.mersys.io"
+		},
+		{
+			"key": "SCHOOLSERVICEAPI",
+			"value": "{{CAMPUSURL}}/school-service/api"
+		},
+		{
+			"key": "BANKACCOUNTS",
+			"value": "{{SCHOOLSERVICEAPI}}/bank-accounts",
+			"type": "string"
+		},
+		{
+			"key": "BankAccountId",
+			"value": "63b944ef44ca3446740418f7",
+			"type": "string"
+		},
+		{
+			"key": "SchoolId",
+			"value": "6390f3207a3bcb6a7ac977f9",
+			"type": "string"
+		},
+		{
+			"key": "BankAccountIban",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "BankAccountIName",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "BankAccountBic",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "BankAccountName",
+			"value": ""
+		}
+	]
+}
