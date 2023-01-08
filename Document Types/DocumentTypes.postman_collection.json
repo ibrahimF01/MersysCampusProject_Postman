@@ -1,0 +1,345 @@
+{
+	"info": {
+		"_postman_id": "713bab8e-86ff-4298-b6fe-46d00f061d47",
+		"name": "DocumentTypes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23504620"
+	},
+	"item": [
+		{
+			"name": "LOGIN 22",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"turkeyts\",\r\n  \"password\": \"TechnoStudy123\",\r\n  \"rememberMe\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/auth/login",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE 22",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"documentsID\", pm.response.json().id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": null,\r\n  \"name\": \"{{$randomFullName}}\",\r\n  \"description\": \"{{$randomFullName}}\",\r\n  \"attachmentStages\": [\r\n    \"EXAMINATION\"\r\n  ],\r\n  \"active\": true,\r\n  \"required\": true,\r\n  \"useCamera\": false,\r\n  \"translateName\": [],\r\n  \"schoolId\": \"6390f3207a3bcb6a7ac977f9\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/attachments/create",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"attachments",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE NEV 22",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"{{documentsID}}\",\r\n  \"name\": \"{{$randomFullName}}\",\r\n  \"description\": \"{{$randomFullName}}\",\r\n  \"attachmentStages\": [\r\n    \"EXAMINATION\"\r\n  ],\r\n  \"active\": true,\r\n  \"required\": true,\r\n  \"useCamera\": false,\r\n  \"translateName\": [],\r\n  \"schoolId\": \"6390f3207a3bcb6a7ac977f9\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/attachments/create",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"attachments",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EDIT",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"{{documentsID}}\",\r\n  \"name\": \"{{$randomFullName}}\",\r\n  \"description\": \"{{$randomFullName}}\",\r\n  \"attachmentStages\": [\r\n    \"EXAMINATION\"\r\n  ],\r\n  \"active\": true,\r\n  \"required\": true,\r\n  \"useCamera\": false,\r\n  \"translateName\": [],\r\n  \"schoolId\": \"6390f3207a3bcb6a7ac977f9\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/attachments",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"attachments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE 22",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/attachments/{{documentsID}}",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"attachments",
+						"{{documentsID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE NEV 22",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/attachments/{{documentsID}}",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"attachments",
+						"{{documentsID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EDIT NEV 22",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"{{documentsID}}\",\r\n  \"name\": \"{{$randomUserName}}\",\r\n  \"description\": \"{{$randomWords}}\",\r\n  \"attachmentStages\": [\r\n    \"STUDENT_REGISTRATION\"\r\n  ],\r\n  \"active\": true,\r\n  \"required\": true,\r\n  \"useCamera\": false,\r\n  \"translateName\": [],\r\n  \"schoolId\": \"5fe07e4fb064ca29931236a5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/attachments",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"attachments"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "documentsID",
+			"value": ""
+		}
+	]
+}

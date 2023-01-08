@@ -1,0 +1,332 @@
+{
+	"info": {
+		"_postman_id": "39a78b1e-3360-4cfb-83fe-b8d08ca6e113",
+		"name": "CLASSES",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23504620"
+	},
+	"item": [
+		{
+			"name": "LOGIN 14",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"turkeyts\",\r\n  \"password\": \"TechnoStudy123\",\r\n  \"rememberMe\": \"true\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/auth/login",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADD 14",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"ClassesID\", pm.response.json().id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": null,\r\n  \"name\": \"{{$randomUserName}}\",\r\n  \"shortName\": \"x{{$randomInt}}y\",\r\n  \"active\": true,\r\n  \"section\": \"veli1\",\r\n  \"gradeLevel\": {\r\n    \"id\": \"63b7dccf418dc97d82b4c962\"\r\n  },\r\n  \"academicPeriod\": {\r\n    \"id\": \"63918286c1e0ca225b833530\"\r\n  },\r\n  \"teacher\": {\r\n    \"id\": \"63b412bdc1f14b24c71bbd81\"\r\n  },\r\n  \"location\": {\r\n    \"id\": \"63b41344c1f14b24c71bbd84\"\r\n  },\r\n  \"department\": {\r\n    \"id\": \"63b410a8c1f14b24c71bbd7e\"\r\n  },\r\n  \"school\": \"6390f3207a3bcb6a7ac977f9\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/classes",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"classes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADD NEV 14",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"{{ClassesID}}\",\r\n  \"name\": \"{{$randomUserName}}\",\r\n  \"shortName\": \"x{{$randomInt}}y\",\r\n  \"active\": true,\r\n  \"section\": \"veli1\",\r\n  \"gradeLevel\": {\r\n    \"id\": \"63b7dccf418dc97d82b4c962\"\r\n  },\r\n  \"academicPeriod\": {\r\n    \"id\": \"63918286c1e0ca225b833530\"\r\n  },\r\n  \"teacher\": {\r\n    \"id\": \"63b412bdc1f14b24c71bbd81\"\r\n  },\r\n  \"location\": {\r\n    \"id\": \"63b41344c1f14b24c71bbd84\"\r\n  },\r\n  \"department\": {\r\n    \"id\": \"63b410a8c1f14b24c71bbd7e\"\r\n  },\r\n  \"school\": \"6390f3207a3bcb6a7ac977f9\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/classes",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"classes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EDIT 14",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"{{ClassesID}}\",\r\n  \"name\": \"{{$randomUserName}}\",\r\n  \"shortName\": \"x{{$randomInt}}y\",\r\n  \"active\": true,\r\n  \"section\": \"veli1\",\r\n  \"gradeLevel\": {\r\n    \"id\": \"63b7dccf418dc97d82b4c962\"\r\n  },\r\n  \"academicPeriod\": {\r\n    \"id\": \"63918286c1e0ca225b833530\"\r\n  },\r\n  \"teacher\": {\r\n    \"id\": \"63b412bdc1f14b24c71bbd81\"\r\n  },\r\n  \"location\": {\r\n    \"id\": \"63b41344c1f14b24c71bbd84\"\r\n  },\r\n  \"department\": {\r\n    \"id\": \"63b410a8c1f14b24c71bbd7e\"\r\n  },\r\n  \"school\": \"6390f3207a3bcb6a7ac977f9\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/classes",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"classes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE 14",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/classes/{{ClassesID}}",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"classes",
+						"{{ClassesID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE NEV 14",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/classes/{{ClassesID}}",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"classes",
+						"{{ClassesID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EDIT NEV 14",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"{{ClassesID}}\",\r\n  \"name\": \"{{$randomUserName}}\",\r\n  \"shortName\": \"x{{$randomInt}}y\",\r\n  \"active\": true,\r\n  \"section\": \"veli1\",\r\n  \"gradeLevel\": {\r\n    \"id\": \"63b7dccf418dc97d82b4c962\"\r\n  },\r\n  \"academicPeriod\": {\r\n    \"id\": \"63918286c1e0ca225b833530\"\r\n  },\r\n  \"teacher\": {\r\n    \"id\": \"63b412bdc1f14b24c71bbd81\"\r\n  },\r\n  \"location\": {\r\n    \"id\": \"63b41344c1f14b24c71bbd84\"\r\n  },\r\n  \"department\": {\r\n    \"id\": \"63b410a8c1f14b24c71bbd7e\"\r\n  },\r\n  \"school\": \"6390f3207a3bcb6a7ac977f9\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/classes",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"classes"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "ClassesID",
+			"value": ""
+		}
+	]
+}
