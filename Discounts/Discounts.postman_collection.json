@@ -1,0 +1,397 @@
+{
+	"info": {
+		"_postman_id": "5072975b-aa6e-4e50-a1f2-b6d1d6958db7",
+		"name": "Discounts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23483183"
+	},
+	"item": [
+		{
+			"name": "LOGIN",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"turkeyts\",\n    \"password\": \"TechnoStudy123\",\n    \"rememberMe\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/auth/login",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creating",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var body = pm.response.json();",
+							"var id = body.id;",
+							"var description = body.description;",
+							"var code = body.code;",
+							"console.log(id);  // kod dogruluk kontrolu",
+							"",
+							"pm.collectionVariables.set(\"discountId\",id);",
+							"pm.collectionVariables.set(\"discountDescription\",description); ",
+							"pm.collectionVariables.set(\"discountCode\", code);",
+							"// collection variables are set.",
+							"",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": null,\n  \"description\": \"Desc_hy\",\n  \"code\": \"Code_hy\",\n  \"active\": false,\n  \"translateDescription\": [],\n  \"priority\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/discounts",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"discounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creating -Negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": null,\n  \"description\": \"{{discountDescription}}\",\n  \"code\": \"{{discountCode}}\",\n  \"active\": false,\n  \"translateDescription\": [],\n  \"priority\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/discounts",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"discounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editing",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var body = pm.response.json();",
+							"var id = body.id;",
+							"var description = body.description;",
+							"var code = body.code;",
+							"console.log(id);  // kod dogruluk kontrolu",
+							"",
+							"pm.collectionVariables.set(\"discountId\",id);",
+							"pm.collectionVariables.set(\"discountDescription\",description); ",
+							"pm.collectionVariables.set(\"discountCode\", code);",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"{{discountId}}\",\n  \"description\": \"Desc_HY1\",\n  \"code\": \"Code_HY1\",\n  \"active\": true,\n  \"translateDescription\": [],\n  \"priority\": 11\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/discounts",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"discounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deleting",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/discounts/{{discountId}}",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"discounts",
+						"{{discountId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editing the deleted -Negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"{{discountId}}\",\n  \"description\": \"Desc_Hy2\",\n  \"code\": \"Code_hy2\",\n  \"active\": true,\n  \"translateDescription\": [],\n  \"priority\": 12\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/discounts",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"discounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deleting -Negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://test.mersys.io/school-service/api/discounts/{{discountId}}",
+					"protocol": "https",
+					"host": [
+						"test",
+						"mersys",
+						"io"
+					],
+					"path": [
+						"school-service",
+						"api",
+						"discounts",
+						"{{discountId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "departmentName",
+			"value": ""
+		},
+		{
+			"key": "departmentCode",
+			"value": ""
+		},
+		{
+			"key": "departmentId",
+			"value": ""
+		},
+		{
+			"key": "departmentSections",
+			"value": ""
+		},
+		{
+			"key": "sectionName",
+			"value": ""
+		},
+		{
+			"key": "sectionshortName",
+			"value": ""
+		},
+		{
+			"key": "sectionShortName",
+			"value": ""
+		},
+		{
+			"key": "departmentConstants",
+			"value": ""
+		},
+		{
+			"key": "constantKey",
+			"value": ""
+		},
+		{
+			"key": "constantValue",
+			"value": ""
+		},
+		{
+			"key": "departmentSchool",
+			"value": ""
+		},
+		{
+			"key": "discountId",
+			"value": ""
+		},
+		{
+			"key": "discountDescription",
+			"value": ""
+		},
+		{
+			"key": "discountCode",
+			"value": ""
+		}
+	]
+}

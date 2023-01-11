@@ -62,7 +62,7 @@
 							"var code = body.code;",
 							"console.log(id);  // kod dogruluk kontrolu",
 							"",
-							"pm.collectionVariables.set(\"departmentId\",id);",
+							"pm.collectionVariables.set(\"departmentID\",id);",
 							"pm.collectionVariables.set(\"departmentName\",name); ",
 							"pm.collectionVariables.set(\"departmentCode\", code);",
 							"// collection variables are set.",
@@ -80,7 +80,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\": null,\n  \"name\": \"Science_Dept\",\n  \"code\": \"SD_10\",\n  \"active\": false,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [],\n  \"constants\": []\n}",
+					"raw": "{\n  \"id\": null,\n  \"name\": \"Science_Dept\",\n  \"code\": \"SD_10\",\n  \"active\": true,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [],\n  \"constants\": []\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -124,7 +124,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\": null,\n  \"name\": \"{{departmentName}}\",\n  \"code\": \"{{departmentCode}}\",\n  \"active\": false,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [],\n  \"constants\": []\n}",
+					"raw": "{\n  \"id\": null,\n  \"name\": \"{{departmentName}}\",\n  \"code\": \"{{departmentCode}}\",\n  \"active\": true,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [],\n  \"constants\": []\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -192,7 +192,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\": \"{{departmentId}}\",\n  \"name\": \"{{departmentName}}\",\n  \"code\": \"{{departmentCode}}\",\n  \"active\": false,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [\n    {\n      \"name\": \"Physics_Sect\",\n      \"shortName\": \"Phy_10\",\n      \"active\": false,\n      \"index\": 1\n    }\n  ],\n  \"constants\": [\n    {\n      \"key\": \"Experiment\",\n      \"value\": \"Ex_10\",\n      \"index\": 1\n    }\n  ]\n}",
+					"raw": "{\n  \"id\": \"{{departmentID}}\",\n  \"name\": \"{{departmentName}}\",\n  \"code\": \"{{departmentCode}}\",\n  \"active\": true,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [\n    {\n      \"name\": \"Physics_Sect\",\n      \"shortName\": \"Phy_10\",\n      \"active\": true,\n      \"index\": 1\n    }\n  ],\n  \"constants\": [\n    {\n      \"key\": \"Experiment\",\n      \"value\": \"Ex_10\",\n      \"index\": 1\n    }\n  ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -225,9 +225,7 @@
 						"exec": [
 							"pm.test(\"Status code is 400\", function () ",
 							"{pm.response.to.have.status(400);}",
-							");",
-							"//Error title should not have been \"bad request\" but its message sholud have been \"there is already a section (record) with same name or short name\"",
-							" "
+							");"
 						],
 						"type": "text/javascript"
 					}
@@ -238,7 +236,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\": {{departmentId}},\n  \"name\": \"{{departmentName}}\",\n  \"code\": \"{{departmentCode}}\",\n  \"active\": false,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [\n    {\n      \"name\": \"Physics_Sect\",\n      \"shortName\": \"Phy_10\",\n      \"active\": false,\n      \"index\": 1\n    },\n    {\"name\": \"Physics_Sect\",\n      \"shortName\": \"Phy_10\",\n      \"active\": false,\n      \"index\": 1\n    }\n  ],\n  \"constants\": [\n    {\n      \"key\": \"Experiment\",\n      \"value\": \"Ex_10\",\n      \"index\": 1\n    },\n      {\n      \"key\": \"Experiment\",\n      \"value\": \"Ex_10\",\n      \"index\": 1\n    }\n  ]\n}",
+					"raw": "{\n  \"id\": \"{{departmentID}}\",\n  \"name\": \"{{departmentName}}\",\n  \"code\": \"{{departmentCode}}\",\n  \"active\": true,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [\n    {\n      \"name\": \"Physics_Sect\",\n      \"shortName\": \"Phy_10\",\n      \"active\": true\n    }\n  ],\n  \"constants\": [\n    {\n      \"key\": \"Experiment\",\n      \"value\": \"Ex_10\"\n    },\n    {\n      \"key\": \"Experiment\",\n      \"value\": \"Ex_10\"\n    }\n  ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -275,7 +273,7 @@
 							"var code = body.code;",
 							"console.log(id);  // kod dogruluk kontrolu",
 							"",
-							"pm.collectionVariables.set(\"departmentId\",id);",
+							"pm.collectionVariables.set(\"departmentID\",id);",
 							"pm.collectionVariables.set(\"departmentName\",name); ",
 							"pm.collectionVariables.set(\"departmentCode\", code);",
 							"",
@@ -292,7 +290,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\": \"{{departmentId}}\",\n  \"name\": \"Art_Dept\",\n  \"code\": \"AD_11\",\n  \"active\": true,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [\n    {\n      \"name\": \"Physics_Sect\",\n      \"shortName\": \"Phy_10\",\n      \"active\": false,\n      \"index\": 1\n    }\n  ],\n  \"constants\": [\n    {\n      \"key\": \"Experiment\",\n      \"value\": \"Ex_10\",\n      \"index\": 1\n    }\n  ]\n}",
+					"raw": "{\n  \"id\": \"{{departmentId}}\",\n  \"name\": \"Art_Dept\",\n  \"code\": \"AD_11\",\n  \"active\": false,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [\n    {\n      \"name\": \"Physics_Sect\",\n      \"shortName\": \"Phy_10\",\n      \"active\": true,\n      \"index\": 1\n    }\n  ],\n  \"constants\": [\n    {\n      \"key\": \"Experiment\",\n      \"value\": \"Ex_10\",\n      \"index\": 1\n    }\n  ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -336,7 +334,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\": \"{{departmentId}}\",\n  \"name\": \"{{departmentName}}\",\n  \"code\": \"{{departmentCode}}\",\n  \"active\": true,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [\n    {\n      \"name\": \"Literature_Sect\",\n      \"shortName\": \"Ltr_11\",\n      \"active\": true,\n      \"index\": 1\n    }\n  ],\n  \"constants\": [\n    {\n      \"key\": \"Reading\",\n      \"value\": \"Rd_11\",\n      \"index\": 1\n    }\n  ]\n}",
+					"raw": "{\n  \"id\": \"{{departmentID}}\",\n  \"name\": \"{{departmentName}}\",\n  \"code\": \"{{departmentCode}}\",\n  \"active\": false,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [\n    {\n      \"name\": \"Literature_Sect\",\n      \"shortName\": \"Ltr_11\",\n      \"active\": false,\n      \"index\": 1\n    }\n  ],\n  \"constants\": [\n    {\n      \"key\": \"Reading\",\n      \"value\": \"Rd_11\",\n      \"index\": 1\n    }\n  ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -437,7 +435,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://test.mersys.io/school-service/api/department/{{departmentId}}",
+					"raw": "https://test.mersys.io/school-service/api/department/{{departmentID}}",
 					"protocol": "https",
 					"host": [
 						"test",
@@ -448,7 +446,7 @@
 						"school-service",
 						"api",
 						"department",
-						"{{departmentId}}"
+						"{{departmentID}}"
 					]
 				}
 			},
@@ -474,7 +472,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\": \"{{departmentId}}\",\n  \"name\": \"{{$randomDepartment}}\",\n  \"code\": \"{{$randomInt}}\",\n  \"active\": true,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [\n    {\n      \"name\": \"Literature_Sect\",\n      \"shortName\": \"Ltr_11\",\n      \"active\": true,\n      \"index\": 1\n    }\n  ],\n  \"constants\": [\n    {\n      \"key\": \"Reading\",\n      \"value\": \"Rd_11\",\n      \"index\": 1\n    }\n  ]\n}",
+					"raw": "{\n  \"id\": \"{{departmentID}}\",\n  \"name\": \"{{$randomDepartment}}\",\n  \"code\": \"{{$randomInt}}\",\n  \"active\": false,\n  \"school\": \"6390f3207a3bcb6a7ac977f9\",\n  \"sections\": [\n    {\n      \"name\": \"Literature_Sect\",\n      \"shortName\": \"Ltr_11\",\n      \"active\": false,\n      \"index\": 1\n    }\n  ],\n  \"constants\": [\n    {\n      \"key\": \"Reading\",\n      \"value\": \"Rd_11\",\n      \"index\": 1\n    }\n  ]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -527,7 +525,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://test.mersys.io/school-service/api/department/{{departmentId}}",
+					"raw": "https://test.mersys.io/school-service/api/department/{{departmentID}}",
 					"protocol": "https",
 					"host": [
 						"test",
@@ -538,7 +536,7 @@
 						"school-service",
 						"api",
 						"department",
-						"{{departmentId}}"
+						"{{departmentID}}"
 					]
 				}
 			},
@@ -588,6 +586,10 @@
 		},
 		{
 			"key": "departmentSchool",
+			"value": ""
+		},
+		{
+			"key": "departmentID",
 			"value": ""
 		}
 	]
